@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="rest-assured-3.3.0-javadoc">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../Libraries/apache-maven-3.6.0/rest-assured-3.3.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
