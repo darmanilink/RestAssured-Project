@@ -1,15 +1,15 @@
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class Account {
-    int id;
-    String username;
-    String firstName;
-    String lastName;
-    String email;
-    String password;
-    String PhoneNO;
-    int userStatus;
-    int sessionID;
+    private  int id;
+    private  String username;
+    private  String firstName;
+    private  String lastName;
+    private  String email;
+    private  String password;
+    private  String PhoneNO;
+    private  int userStatus;
+    private  int sessionID;
 
     public Account(String Username, String Password){
         int id = Integer.parseInt(RandomStringUtils.randomAlphanumeric(10)); //assume i checked that it didnt exist
@@ -43,6 +43,8 @@ public class Account {
                 "\"phone\":\"%s\"," +
                 "\"userStatus\":%i}",id,firstName,lastName,email,password,PhoneNO, userStatus);
     }
+
+    /*i'll likely wind up making a get/set function generator that just writes it all to a file*/
     //{
     //  "id": 0,
     //  "username": "string",

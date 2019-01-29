@@ -45,9 +45,9 @@ public class StoreManager {
                 .delete(PET_BASE + String.format("/%s", id));
     }
 
-    public void BuyPet(int id) {
+    public void BuyPet(int id, RequestSpecification rqusr) {
         Pet temp = new Pet();
-        temp.self_as_json = given(rq)
+        temp.self_as_json = given(rqusr)
                 .get(PET_BASE + id).toString();
         temp.self_as_json.replace("Availible", "Sold");
 
@@ -121,10 +121,9 @@ public class StoreManager {
                         " \"phone\": \"string\", " +
                         " \"userStatus\": 0}").post(USER_BASE);
     }
-    public void UpdateAccount(String username){
-        String str = given(rq).get(USER_BASE + String.format("/%s", username)).toString();
+    public void UpdateAccount(String current, String upd_username){
+        String str = given(rq).put(USER_BASE + String.format("/%s?username=%s", current, upd_username)).toString();
         JsonObject json = new JsonObject();
-
     }
     public void CreateMultipleAccounts(Account[] acc){
         String json = "{";
@@ -133,8 +132,6 @@ public class StoreManager {
         given(rq).body(json).post(USER_BASE + "/createWithArray");
     }
     public void DeleteAccount(String username){
-        given().baseUri(URL_BASE)
-                .body(username)
-                .delete(USER_BASE);
+        given(rq).delete(USER_BASE + String.format("?username=%s", username));
     }
 }

@@ -1,0 +1,118 @@
+This is mainly modified in the sense that I don't serialize it before reconverting it back to json as it seems
+like a waste of computer resources if you aren't going to do any java-y stuff with the converted data. String replacements
+are faster than serialization and especially reflection so any edits are done directly to the JSON as a string, leaving
+seralization "testing" side if need be, although the server handles everything you would practically need.
+
+A few classes that are used exclusively by the pet class are static nested classes rather than separate classes in the
+same scope.
+
+While there aren't any tests included in the submitted github project, many things would be "testing side", such as getting
+your session id and auth token.
+
+I started by working on the Pet.java file which handles all the basic functionality for building pets, but later moved on to
+doing all RESTy operations that were "class specific" (specifically account) inside of the store manager while only using the class
+effectively as a variable container.
+
+I skimmed the server documentation when starting, so I implemented some things in pet.java that were already handled
+by the server.
+
+This is mainly different in that I covered every method in StoreManager and didn't serialize then reconvert.
+
+class Pet:
+
+    static class Catagory : int id, String name
+    static class Tag : int id, String name
+
+    public static final String[] Statuses;
+    private Catagory catagory;
+    private List<String> photos;
+    private List<Tag> tags;
+    private String status;
+    private String name;
+    private int id;
+    constructor:
+        default
+        complete
+    functions :
+        get/set catagory, status, photos
+            returns: get - void, set - their corresponding datatypes
+        ListToJsonArray(List)
+            returns: Json array containing the passed list as a strong.
+        ExportAsJSON(void)
+            returns: pet as a JsonObject
+        toString(void)
+            returns: ExportAsJSON as a string
+
+class Account:
+        private  int id;
+        private  String username;
+        private  String firstName;
+        private  String lastName;
+        private  String email;
+        private  String password;
+        private  String PhoneNO;
+        private  int userStatus;
+        private  int sessionID;
+
+        constructor:
+            username, pw
+            complete
+
+         functions:
+            toString()
+                returns self as a JsonObject packed into a string.
+
+class StoreManager:
+        static String URL_BASE
+        static String PET_BASE
+        static String USER_BASE
+        static String STORE_BASE
+        static String USER_LOGIN
+        static String USER_LOGOUT
+        static String ORDER_BASE
+            string constants to make my life easier
+        RequestSpecification rq
+            holds default request data for account nonspecific actions
+
+        functions:
+            AddPet(int id, String name)
+                adds a pet based on that data
+            AddPet(String JSONSTRING)
+                adds a pet based on a json string
+             DeletePet(int id)
+                deletes a pet based on the id
+             BuyPet(int id, rquser)
+                flags the pet you bought as such, uses your request format as it'll hold your account details
+              UpdatePetName(int id, String name)
+                updates the pet with the given id
+              String GetPet(int id)
+                returns: pet as a json string
+              UploadImage(String path)
+                uploads an image at the provided path
+              UploadImage(String path, String metadata)
+                uploads an image with metadata
+               GetInventory
+                returns: Json array of the pet inventory
+              GetOrder(int id)
+                returns: jsonstring of order by id
+              DeleteOrder(int id)
+                deletes order at id
+              Login(String username, String password)
+                returns: sessionid
+              Logout(RequestSpecification)
+                logs out
+               UpdateAccount(string current, string updated_username)
+                   replaces a current username with the updated one
+            CreateMultipleAccounts
+                creates multiple accounts based on the list of given accounts that get packed into a json array
+             From json list not included as no functionality exists inside to allow for such
+
+             DeleteAccount(String username)
+                deletes an account with the given username
+
+
+
+
+
+
+

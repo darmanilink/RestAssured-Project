@@ -99,6 +99,10 @@ public class Pet {
 
         return obj;
     }
+
+    public String toString(){
+       return ExportAsJSON().toString();
+    }
     /*
     {
   "id": 0,
